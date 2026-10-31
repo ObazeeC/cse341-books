@@ -9,8 +9,10 @@ const getAllBooks = async () => {
   //*** * do everything with one line of code ***
   //  return await getDb().collection("books").find({}).toArray();
  
-
 }
 
+const getBookById = async(bookId) =>{
+    return await getDb().collection("books").findOne({id:bookId});
+}
 
-export {getAllBooks};
+export {getAllBooks, getBookById};
