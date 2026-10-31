@@ -1,10 +1,9 @@
 console.log("MONGODB_URI =", process.env.MONGODB_URI);
 import app from "./app.js";
 import {connectToDb} from "./src/db/connect.js";
-
+//import { getDb } from "./src/db/connect.js";
 
 // use port from .env or default to 3000
-
 const PORT = process.env.PORT;
 
 if (!PORT) {
@@ -14,7 +13,9 @@ if (!PORT) {
 const startServer = async () => {
   try {
     await connectToDb();
-
+    /****** test connection and log book to console */
+    // const books = await getDb().collection("books").find({}).toArray();
+   //  console.log("Books documents:", books);
     app.listen(PORT, () => {
       console.log(`Server listening on port ${PORT}`);
     });
