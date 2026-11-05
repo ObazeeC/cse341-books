@@ -30,8 +30,8 @@
                     "type": "object",
                     "properties": {
                       "id": {
-                        "type": "integer",
-                        "example": 1
+                        "type": "string",
+                        "example": "b1"
                       },
                       "title": {
                         "type": "string",
@@ -67,8 +67,8 @@
             "required": true,
             "description": "The ID of the book to retrieve.",
             "schema": {
-              "type": "integer",
-              "example": 1
+              "type": "string",
+              "example": "b1"
             }
           }
         ],
@@ -81,8 +81,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "integer",
-                      "example": 1
+                      "type": "string",
+                      "example": "b1"
                     },
                     "title": {
                       "type": "string",

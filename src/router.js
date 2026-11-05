@@ -22,8 +22,8 @@ const router  = express.Router();
  *                 type: object
  *                 properties:
  *                   id:
- *                     type: integer
- *                     example: 1
+ *                     type: string
+ *                     example: b1
  *                   title:
  *                     type: string
  *                     example: The Great Gatsby
@@ -50,8 +50,8 @@ router.get("/books", getBooksHandler);
  *         required: true
  *         description: The ID of the book to retrieve.
  *         schema:
- *           type: integer
- *           example: 1
+ *           type: string
+ *           example: b1
  *     responses:
  *       200:
  *         description: Book retrieved successfully.
@@ -61,8 +61,8 @@ router.get("/books", getBooksHandler);
  *               type: object
  *               properties:
  *                 id:
- *                   type: integer
- *                   example: 1
+ *                   type: string
+ *                   example: b1
  *                 title:
  *                   type: string
  *                   example: The Great Gatsby
