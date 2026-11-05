@@ -1,5 +1,7 @@
 import { getAllBooks,getBookById } from "../models/books.js";
 
+// get all books
+
 const getBooksHandler = async ( req, res)  => {
     try{
         const allbooks = await getAllBooks();
@@ -11,6 +13,7 @@ const getBooksHandler = async ( req, res)  => {
     }
 }
 
+// get a single book by id 
 const getBookByIdHandler = async(req, res) =>{
     const requestedId = req.params.id;
     try{
@@ -26,5 +29,8 @@ const getBookByIdHandler = async(req, res) =>{
     }
 
 }
+
+
+
 
 export {getBooksHandler, getBookByIdHandler}

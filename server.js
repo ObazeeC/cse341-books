@@ -1,4 +1,4 @@
-console.log("MONGODB_URI =", process.env.MONGODB_URI);
+//console.log("MONGODB_URI =", process.env.MONGODB_URI);
 import app from "./app.js";
 import {connectToDb} from "./src/db/connect.js";
 //import { getDb } from "./src/db/connect.js";
