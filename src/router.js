@@ -76,4 +76,21 @@ router.get("/books", getBooksHandler);
  */
 router.get("/books/:id", getBookByIdHandler)
 
+
+
+/**
+ * @openapi
+ * /authors:
+ *   get:
+ *     summary: Get all authors
+ *     description: Returns all authors.
+ *     responses:
+ *       200:
+ *         description: Success
+ */
+//router.get('/', authorsController.getAllAuthors);
+//DO FOR EVERY ROUTE
+
+
+
 export default router;
