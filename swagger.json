@@ -51,6 +51,81 @@
             "description": "Internal server error."
           }
         }
+      },
+      "post": {
+        "summary": "Create a new book",
+        "description": "Creates a new book and stores it in the database.",
+        "tags": [
+          "Books"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "id",
+                  "authorid",
+                  "title",
+                  "publicationDate"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "example": "b1"
+                  },
+                  "authorid": {
+                    "type": "string",
+                    "example": "a1"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "Node.js Fundamentals"
+                  },
+                  "publicationDate": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "2025-01-01"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Book created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "authorid": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "publicationDate": {
+                      "type": "string",
+                      "format": "date"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing required fields."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
       }
     },
     "/books/{id}": {
@@ -96,6 +171,90 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Book not found."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a book",
+        "description": "Updates an existing book by its ID.",
+        "tags": [
+          "Books"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "b1"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authorid": {
+                    "type": "string",
+                    "example": "a1"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "Updated Node.js Fundamentals"
+                  },
+                  "publicationDate": {
+                    "type": "string",
+                    "format": "date",
+                    "example": "2025-10-01"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Book updated successfully."
+          },
+          "404": {
+            "description": "Book not found."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a book",
+        "description": "Deletes a book by its ID.",
+        "tags": [
+          "Books"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The ID of the book to delete.",
+            "schema": {
+              "type": "string",
+              "example": "b1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Book deleted successfully."
           },
           "404": {
             "description": "Book not found."
