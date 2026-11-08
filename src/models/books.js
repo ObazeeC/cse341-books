@@ -21,6 +21,13 @@ const createBook = async(book) => {
   return await getDb().collection("books").insertOne(book)
 }
 
+// update a book
+const updatebook = async(bookid, updatedBook) => {
+  return await getDb().collection("books").updateOne(
+    {id:bookid},
+    {$set:updatedBook}
+  );
+};
 
 
-export {getAllBooks, getBookById, createBook};
+export {getAllBooks, getBookById, createBook, updatebook};

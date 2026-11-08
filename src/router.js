@@ -1,5 +1,5 @@
 import express from "express";
-import { getBooksHandler, getBookByIdHandler, createBookHandler } from "./controllers/books.js";
+import { getBooksHandler, getBookByIdHandler, createBookHandler, updateBookHandler } from "./controllers/books.js";
 
 const router  = express.Router();
 
@@ -132,10 +132,49 @@ router.get("/books/:id", getBookByIdHandler)
  *       500:
  *         description: Internal server error.
  */
-
 router.post("/books", createBookHandler);
 
-
+/**
+ * @openapi
+ * /books/{id}:
+ *   put:
+ *     summary: Update a book
+ *     description: Updates an existing book by its ID.
+ *     tags:
+ *       - Books
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         example: b1
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               authorid:
+ *                 type: string
+ *                 example: a1
+ *               title:
+ *                 type: string
+ *                 example: Updated Node.js Fundamentals
+ *               publicationDate:
+ *                 type: string
+ *                 format: date
+ *                 example: 2025-10-01
+ *     responses:
+ *       200:
+ *         description: Book updated successfully.
+ *       404:
+ *         description: Book not found.
+ *       500:
+ *         description: Internal server error.
+ */
+router.put("/books/:id", updateBookHandler);
 
 
 
