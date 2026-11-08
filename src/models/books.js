@@ -34,4 +34,10 @@ const deleteBook = async(bookid) =>{
   return await getDb().collection("books").deleteOne({id:bookid});
 };
 
-export {getAllBooks, getBookById, createBook, updatebook, deleteBook};
+// getAuthorId
+const getAuthorId = async(authorId) =>{
+  return await getDb().collection("books").findOne({id:authorId});
+}
+
+
+export {getAllBooks, getBookById, createBook, updatebook, deleteBook, getAuthorId};
