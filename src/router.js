@@ -1,5 +1,5 @@
 import express from "express";
-import { getBooksHandler, getBookByIdHandler } from "./controllers/books.js";
+import { getBooksHandler, getBookByIdHandler, createBookHandler } from "./controllers/books.js";
 
 const router  = express.Router();
 
@@ -77,7 +77,7 @@ router.get("/books", getBooksHandler);
 router.get("/books/:id", getBookByIdHandler)
 
 
-
+/*
 /**
  * @openapi
  * /authors:
@@ -88,8 +88,9 @@ router.get("/books/:id", getBookByIdHandler)
  *       200:
  *         description: Success
  */
-//router.get('/', authorsController.getAllAuthors);
-//DO FOR EVERY ROUTE
+router.post("/books", createBookHandler);
+
+
 
 
 
