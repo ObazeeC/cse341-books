@@ -1,4 +1,4 @@
-import { getAllBooks,getBookById,createBook,updatebook, deleteBook } from "../models/books.js";
+import { getAllBooks,getBookById,createBook,updatebook, deleteBook, getAuthorId } from "../models/books.js";
 
 // get all books
 
@@ -39,6 +39,11 @@ const createBookHandler = async(req, res) => {
             return res.status(400).json({message:"id, authorid, title and publication date are required"});
         }
 
+        // check if author exists
+        const author = await getAuthorId(authorid);
+        if(!author){
+            return res.status(400).json({message:"Invalid authorid. Author does not exist"});
+        }
         const newbook = {id, authorid, title, publicationDate};
         const book = await createBook(newbook);
         if(!book){

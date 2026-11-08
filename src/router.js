@@ -86,7 +86,7 @@ router.get("/books/:id", getBookByIdHandler)
  * /books:
  *   post:
  *     summary: Create a new book
- *     description: Creates a new book and stores it in the database.
+ *     description: Creates a new book and stores it in the database. The authorid must reference an existing author in the authors collection
  *     tags:
  *       - Books
  *     requestBody:
@@ -143,7 +143,7 @@ router.post("/books", createBookHandler);
  * /books/{id}:
  *   put:
  *     summary: Update a book
- *     description: Updates an existing book by its ID.
+ *     description: Updates an existing book by its ID. The authorid must reference an existing author in the authors collection
  *     tags:
  *       - Books
  *     parameters:
