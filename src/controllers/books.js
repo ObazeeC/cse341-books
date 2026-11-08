@@ -67,6 +67,13 @@ const updateBookHandler = async(req, res)=>{
         if(!authorid || !title || !publicationDate){
             return res.status(400).json({message: "authorid, title and publication date are required"});
         }
+
+        // check if author exists
+        const author = await getAuthorId(authorid);
+        if(!author){
+            return res.status(400).json({message:"Invalid authorid. Author does not exist"});
+        }
+        
         const updatedBook = {authorid, title, publicationDate};
         const result = await updatebook(id, updatedBook)
 
