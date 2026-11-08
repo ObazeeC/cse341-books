@@ -18,7 +18,7 @@ const getBookById = async(bookId) =>{
 
 //create one boock
 const createBook = async(book) => {
-  return await getDb().collection("book").insertOne(book)
+  return await getDb().collection("books").insertOne(book)
 }
 
 
