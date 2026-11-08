@@ -31,6 +31,22 @@ const getBookByIdHandler = async(req, res) =>{
 }
 
 
+// create or POST book 
+const createBookHandler = async(req, res) => {
+    try {
+        const {id, authorid, title, publicationDate} = req.body;
+        if(!id || !authorid || !title || !publicationDate){
+            return res.status(400).json({message:"id, authorid, title and publication date are required"});
+        }
+
+        const newbook = {id, authorid, title, publicationDate};
+        await createBook.createBookHandler(newbook);
+        return res.status(201).json(newbook)
+    } catch (error){
+        return res.status(500).json({message: "Unable to create product"});
+    }
+
+}
 
 
-export {getBooksHandler, getBookByIdHandler}
+export {getBooksHandler, getBookByIdHandler, createBookHandler}

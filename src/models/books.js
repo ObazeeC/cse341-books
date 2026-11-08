@@ -15,4 +15,12 @@ const getBookById = async(bookId) =>{
     return await getDb().collection("books").findOne({id:bookId});
 }
 
-export {getAllBooks, getBookById};
+
+//create one boock
+const createBook = async(book) => {
+  return await getDb().collection("book").insertOne(book)
+}
+
+
+
+export {getAllBooks, getBookById, createBook};
