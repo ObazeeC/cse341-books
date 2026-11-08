@@ -1,4 +1,4 @@
-import { getAllBooks,getBookById,createBook } from "../models/books.js";
+import { getAllBooks,getBookById,createBook,updatebook } from "../models/books.js";
 
 // get all books
 
@@ -53,4 +53,25 @@ const createBookHandler = async(req, res) => {
 }
 
 
-export {getBooksHandler, getBookByIdHandler, createBookHandler}
+// Update or PUT book
+const updateBookHandler = async(req, res)=>{
+    try{
+        const {id} = req.params;
+        const {authorid, title, publicationDate} = req.body;
+
+        if(!authorid || !title || !publicationDate){
+            return res.status(400).json({message: "authorid, title and publication date are required"});
+        }
+        const updatedBook = {authorid, title, publicationDate};
+        const result = await updatebook(id, updatedBook)
+
+        if(result.matchdCount === 0){
+            return res.status(400).json({  message: "Book not found"});
+        }
+        return res.status(200).json({message: "Book updated successfully"})
+    } catch(error){
+           return res.status(500).json({message: "Unable to update record"});
+    }
+}
+
+export {getBooksHandler, getBookByIdHandler, createBookHandler,updateBookHandler}
