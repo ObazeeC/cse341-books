@@ -1,4 +1,4 @@
-import { getAllBooks,getBookById } from "../models/books.js";
+import { getAllBooks,getBookById,createBook } from "../models/books.js";
 
 // get all books
 
@@ -40,10 +40,14 @@ const createBookHandler = async(req, res) => {
         }
 
         const newbook = {id, authorid, title, publicationDate};
-        await createBook.createBookHandler(newbook);
-        return res.status(201).json(newbook)
+        const book = await createBook(newbook);
+        if(!book){
+                return res.status(404).json({Message: "Invalid input"}) 
+        }
+        return res.status(201).json(book)
     } catch (error){
-        return res.status(500).json({message: "Unable to create product"});
+        return res.status(500).json({message: "Unable to create new book"});
+       //return res.status(500).json({message: error.message}); --debugging
     }
 
 }
