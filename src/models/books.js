@@ -29,5 +29,9 @@ const updatebook = async(bookid, updatedBook) => {
   );
 };
 
+// delete a book
+const deleteBook = async(bookid) =>{
+  return await getDb().collection("books").deleteOne({id:bookid});
+};
 
-export {getAllBooks, getBookById, createBook, updatebook};
+export {getAllBooks, getBookById, createBook, updatebook, deleteBook};

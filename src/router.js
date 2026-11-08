@@ -1,5 +1,9 @@
 import express from "express";
-import { getBooksHandler, getBookByIdHandler, createBookHandler, updateBookHandler } from "./controllers/books.js";
+import {    getBooksHandler, 
+            getBookByIdHandler, 
+            createBookHandler, 
+            updateBookHandler, 
+            deleteBookHandler } from "./controllers/books.js";
 
 const router  = express.Router();
 
@@ -176,6 +180,32 @@ router.post("/books", createBookHandler);
  */
 router.put("/books/:id", updateBookHandler);
 
+
+/**
+ * @openapi
+ * /books/{id}:
+ *   delete:
+ *     summary: Delete a book
+ *     description: Deletes a book by its ID.
+ *     tags:
+ *       - Books
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The ID of the book to delete.
+ *         schema:
+ *           type: string
+ *           example: b1
+ *     responses:
+ *       200:
+ *         description: Book deleted successfully.
+ *       404:
+ *         description: Book not found.
+ *       500:
+ *         description: Internal server error.
+ */
+router.delete("/books/:id", deleteBookHandler);
 
 
 export default router;

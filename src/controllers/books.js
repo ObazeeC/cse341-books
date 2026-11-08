@@ -1,4 +1,4 @@
-import { getAllBooks,getBookById,createBook,updatebook } from "../models/books.js";
+import { getAllBooks,getBookById,createBook,updatebook, deleteBook } from "../models/books.js";
 
 // get all books
 
@@ -74,4 +74,20 @@ const updateBookHandler = async(req, res)=>{
     }
 }
 
-export {getBooksHandler, getBookByIdHandler, createBookHandler,updateBookHandler}
+// delete book handler
+const deleteBookHandler = async(req, res) => {
+    try{
+     const{id} = req.params;
+
+     const result = await deleteBook(id);
+
+     if(result.deletedCount === 0){
+        return res.status(400).json({  message: "Book not found"});
+     };
+
+     return res.status(200).json({message: "Book deleted successfully"});
+    }catch(error){
+        return res.status(500).json({message: "Unable to delete record"});
+    }
+}
+export {getBooksHandler, getBookByIdHandler, createBookHandler,updateBookHandler, deleteBookHandler}
