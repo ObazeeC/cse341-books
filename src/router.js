@@ -77,17 +77,62 @@ router.get("/books", getBooksHandler);
 router.get("/books/:id", getBookByIdHandler)
 
 
-/*
-/**
+/****
  * @openapi
- * /authors:
- *   get:
- *     summary: Get all authors
- *     description: Returns all authors.
+ * /books:
+ *   post:
+ *     summary: Create a new book
+ *     description: Creates a new book and stores it in the database.
+ *     tags:
+ *       - Books
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - id
+ *               - authorid
+ *               - title
+ *               - publicationDate
+ *             properties:
+ *               id:
+ *                 type: string
+ *                 example: b1
+ *               authorid:
+ *                 type: string
+ *                 example: a1
+ *               title:
+ *                 type: string
+ *                 example: Node.js Fundamentals
+ *               publicationDate:
+ *                 type: string
+ *                 format: date
+ *                 example: 2025-01-01
  *     responses:
- *       200:
- *         description: Success
+ *       201:
+ *         description: Book created successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                 authorid:
+ *                   type: string
+ *                 title:
+ *                   type: string
+ *                 publicationDate:
+ *                   type: string
+ *                   format: date
+ *       400:
+ *         description: Missing required fields.
+ *       500:
+ *         description: Internal server error.
  */
+
 router.post("/books", createBookHandler);
 
 
