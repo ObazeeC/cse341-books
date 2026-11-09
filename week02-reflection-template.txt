@@ -6,11 +6,11 @@
 Video link:
 
 2. Provide a link to your deployed Render api-docs URL:
-Render link:
+Render link: https://cse341-books-pmvp.onrender.com
 
 3. Provide links to your Pull Requests (they should be merged at this point):
 Books PR: https://github.com/ObazeeC/cse341-books/pull/11
-Authors PR:
+Authors PR:https://github.com/ObazeeC/cse341-books/pull/14
 
 4. Provide links to your GitHub Issues (they should be closed at this point).
 Books Issue:https://github.com/ObazeeC/cse341-books/issues/9
@@ -20,14 +20,14 @@ Authors Issue:https://github.com/ObazeeC/cse341-books/issues/10
 
 5. Which part of the work took more or less time than expected? Why?
 
-Answer:
+Answer: PUT request, came across multiple issues referencing the correct id to work it
 
 6. How did Swagger help you in your work this week?
 
-Answer:
+Answer: Quite simple and straightforward to test CRUD request for both authors and books
 
 ## Week 03 Improvement
 
 7. What is one specific habit or process you will apply next week?
 
-Answer:
+Answer:Break problem into smaller problems, and solve bit by bit

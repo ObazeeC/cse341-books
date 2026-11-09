@@ -284,7 +284,7 @@ router.get("/authors", getauthorsHandler);
  *             required:
  *               - id
  *               - name
- *               - birthYear
+ *               - birthDate
  *             properties:
  *               id:
  *                 type: string
@@ -292,7 +292,7 @@ router.get("/authors", getauthorsHandler);
  *               name:
  *                 type: string
  *                 example: Sophia Bennett
- *               birthYear:
+ *               birthDate:
  *                 type: string
  *                 example: "1999-11-11"
  *     responses:
@@ -321,7 +321,7 @@ router.get("/authors", getauthorsHandler);
  *             required:
  *               - id
  *               - name
- *               - birthYear
+ *               - birthDate
  *             properties:
  *               id:
  *                 type: string
@@ -329,7 +329,7 @@ router.get("/authors", getauthorsHandler);
  *               name:
  *                 type: string
  *                 example: Sophia Bennett
- *               birthYear:
+ *               BirthDate:
  *                 type: string
  *                 example: "1990"
  *     responses:
