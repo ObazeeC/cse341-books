@@ -3,7 +3,12 @@ import {    getBooksHandler,
             getBookByIdHandler, 
             createBookHandler, 
             updateBookHandler, 
-            deleteBookHandler } from "./controllers/books.js";
+            deleteBookHandler,
+            getauthorsHandler,
+            getAuthorByIdHandler,
+            createAuthorHandler,
+            updateAuthorHandler,
+            deleteAuthorHandler} from "./controllers/books.js";
 
 const router  = express.Router();
 
@@ -207,5 +212,159 @@ router.put("/books/:id", updateBookHandler);
  */
 router.delete("/books/:id", deleteBookHandler);
 
+
+/**
+ * @swagger
+ * /authors:
+ *   get:
+ *     summary: Get all authors
+ *     description: Returns a list of all authors.
+ *     responses:
+ *       200:
+ *         description: A list of authors.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                     example: "6af0f8d1e3e462291176d9f9"
+ *                   id:
+ *                     type: string
+ *                     example: "a1"
+ *                   name:
+ *                     type: string
+ *                     example: "Chinua Achebe"
+ *                   birthDate:
+ *                     type: string
+ *                     example: "1930-11-16"
+ */
+router.get("/authors", getauthorsHandler);
+
+
+/**
+ * @swagger
+ * /authors/{id}:
+ *   get:
+ *     summary: Get an author by ID
+ *     description: Returns a single author.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         example: a1
+ *     responses:
+ *       200:
+ *         description: Author found.
+ *       404:
+ *         description: Author not found.
+ */
+ router.get("/authors/:id", getAuthorByIdHandler);
+
+
+ /**
+ * @swagger
+ * /authors:
+ *   post:
+ *     summary: Create a new author
+ *     description: Creates a new author.
+ *     tags:
+ *       - Authors
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - id
+ *               - name
+ *               - birthYear
+ *             properties:
+ *               id:
+ *                 type: string
+ *                 example: a3
+ *               name:
+ *                 type: string
+ *                 example: Sophia Bennett
+ *               birthYear:
+ *                 type: string
+ *                 example: "1999-11-11"
+ *     responses:
+ *       201:
+ *         description: Author created successfully.
+ *       400:
+ *         description: Invalid author data.
+ */
+ router.post("/authors", createAuthorHandler);
+
+
+ /**
+ * @swagger
+ * /authors:
+ *   post:
+ *     summary: Create a new author
+ *     description: Creates a new author and adds it to the collection.
+ *     tags:
+ *       - Authors
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - id
+ *               - name
+ *               - birthYear
+ *             properties:
+ *               id:
+ *                 type: string
+ *                 example: a3
+ *               name:
+ *                 type: string
+ *                 example: Sophia Bennett
+ *               birthYear:
+ *                 type: string
+ *                 example: "1990"
+ *     responses:
+ *       201:
+ *         description: Author created successfully.
+ *       400:
+ *         description: Invalid author data.
+ */
+router.put("/authors/:id", updateAuthorHandler); 
+
+
+/**
+ * @openapi
+ * /authors/{id}:
+ *   delete:
+ *     summary: Delete an author
+ *     description: Deletes an author by its ID.
+ *     tags:
+ *       - Authors
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The ID of the author to delete.
+ *         schema:
+ *           type: string
+ *           example: a1
+ *     responses:
+ *       200:
+ *         description: Author deleted successfully.
+ *       404:
+ *         description: Author not found.
+ *       500:
+ *         description: Internal server error.
+ */
+router.delete("/authors/:id", deleteAuthorHandler);
 
 export default router;

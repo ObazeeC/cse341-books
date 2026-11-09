@@ -1,4 +1,6 @@
-import { getAllBooks,getBookById,createBook,updatebook, deleteBook, getAuthorId } from "../models/books.js";
+import { getAllBooks,getBookById,createBook,updatebook, deleteBook, getAuthorId,
+         getAllauthors,getAuthorById,createAuthor,updateAuthor, deleteAuthor
+        } from "../models/books.js";
 
 // get all books
 
@@ -102,4 +104,115 @@ const deleteBookHandler = async(req, res) => {
         return res.status(500).json({message: "Unable to delete record"});
     }
 }
-export {getBooksHandler, getBookByIdHandler, createBookHandler,updateBookHandler, deleteBookHandler}
+
+
+// authors
+
+//all authors
+const getauthorsHandler = async ( req, res)  => {
+    try{
+        const authors = await getAllauthors();
+       return res.status(200).json(authors); 
+
+    }catch(error){
+     console.error("GET /books failed:", error.message);
+     return res.status(500).json({Message: "Internal server error "});
+    }
+}
+
+// author by id
+// get a single author
+const getAuthorByIdHandler = async(req, res) =>{
+    const requestedId = req.params.id;
+    try{
+      const author = await getAuthorById(requestedId);
+      if(!author){
+        return res.status(404).json({Message: "Author not found"})
+      }
+      return res.status(200).json(author);
+
+    }catch(error){
+        console.error("Get /authors/id failed: ", error.message);
+        return res.status(500).json({Message: "Internal server error"})
+    }
+
+}
+
+
+// create or POST book 
+const createAuthorHandler = async(req, res) => {
+    try {
+        const {id, name, birthDate} = req.body;
+        if(!id || !name || !birthDate){
+            return res.status(400).json({message:"id, name and birth date are required"});
+        }
+
+        // check if author exists
+        const author = await getAuthorId(id);
+        
+        if(author){
+            return res.status(400).json({message:"Invalid authorid. Author already exist"});
+        }
+        const authorC = {id, name, birthDate};
+        const newAuthor = await createAuthor(authorC);
+        if(!newAuthor){
+                return res.status(404).json({Message: "Invalid input"}) 
+        }
+        return res.status(201).json(newAuthor)
+    } catch (error){
+        return res.status(500).json({message: "Unable to create new author"});
+       //return res.status(500).json({message: error.message}); --debugging
+    }
+
+}
+
+// Update or PUT book
+const updateAuthorHandler = async(req, res)=>{
+    try{
+        const {paramid} = req.params;
+        const {id, name, birthDate} = req.body;
+
+        if(!id || !name || !birthDate){
+            return res.status(400).json({message: "id, name and birth date are required"});
+        }
+
+        // check if author exists
+        const author = await getAuthorId(id);
+        if(!author){
+            return res.status(400).json({message:"Invalid authorid. Author does not exist"});
+        }
+        
+        const updatedAuthor = {id, name, birthDate};
+        const result = await updateAuthor(paramid, updatedAuthor)
+
+        if(result.matchdCount === 0){
+            return res.status(400).json({  message: "Author not found"});
+        }
+        return res.status(200).json({message: "Author updated successfully"})
+    } catch(error){
+           return res.status(500).json({message: "Unable to update record"});
+    }
+}
+
+// delete book handler
+const deleteAuthorHandler = async(req, res) => {
+    try{
+     const{id} = req.params;
+
+     const result = await deleteAuthor(id);
+
+     if(result.deletedCount === 0){
+        return res.status(400).json({  message: "Author not found"});
+     };
+
+     return res.status(200).json({message: "Author deleted successfully"});
+    }catch(error){
+        return res.status(500).json({message: "Unable to delete record"});
+    }
+}
+
+
+
+export {getBooksHandler, getBookByIdHandler, createBookHandler,updateBookHandler, 
+        deleteBookHandler,getauthorsHandler,getAuthorByIdHandler, createAuthorHandler,
+        updateAuthorHandler,deleteAuthorHandler}
