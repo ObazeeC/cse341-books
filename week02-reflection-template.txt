@@ -10,7 +10,7 @@ Render link:
 
 3. Provide links to your Pull Requests (they should be merged at this point):
 Books PR: https://github.com/ObazeeC/cse341-books/pull/11
-Authors PR:
+Authors PR:https://github.com/ObazeeC/cse341-books/pull/14
 
 4. Provide links to your GitHub Issues (they should be closed at this point).
 Books Issue:https://github.com/ObazeeC/cse341-books/issues/9
