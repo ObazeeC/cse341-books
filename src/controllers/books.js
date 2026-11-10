@@ -1,4 +1,4 @@
-import { getAllBooks,getBookById,createBook,updatebook, deleteBook, getAuthorId,
+import { getAllBooks,getBookById,createBook,updatebook, deleteBook,
          getAllauthors,getAuthorById,createAuthor,updateAuthor, deleteAuthor, getIdAuthorCollection
         } from "../models/books.js";
 
@@ -33,7 +33,61 @@ const getBookByIdHandler = async(req, res) =>{
 }
 
 
-// create or POST book 
+// create or POST book*/ 
+const createBookHandler = async (req, res) => {
+  try {
+    const { id, authorid, title, publicationDate } = req.body;
+
+    // Validate required fields
+    if (!id || !authorid || !title || !publicationDate) {
+      return res.status(400).json({
+        message:
+          "id, authorid, title, and publicationDate are required"
+      });
+    }
+
+    // Check for duplicate book id
+    const existingBook = await getBookById(id);
+
+    if (existingBook) {
+      return res.status(400).json({
+        message: "Book id already exists"
+      });
+    }
+
+    // Check that author exists
+    const author = await getAuthorById(authorid);
+
+    if (!author) {
+      return res.status(400).json({
+        message: "Invalid authorid. Author does not exist"
+      });
+    }
+
+    const newBook = {
+      id,
+      authorid,
+      title,
+      publicationDate
+    };
+
+    const result = await createBook(newBook);
+
+    if (!result.acknowledged) {
+      return res.status(500).json({
+        message: "Failed to create book"
+      });
+    }
+
+    // Return the created book object per spec
+    return res.status(201).json(newBook);
+
+  } catch (error) {
+    return res.status(500).json({message: "Unable to create new book"})
+  }
+};
+
+/*
 const createBookHandler = async(req, res) => {
     try {
         const {id, authorid, title, publicationDate} = req.body;
@@ -58,7 +112,7 @@ const createBookHandler = async(req, res) => {
     }
 
 }
-
+*/
 
 // Update or PUT book
 const updateBookHandler = async(req, res)=>{
