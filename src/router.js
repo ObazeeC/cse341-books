@@ -103,14 +103,14 @@ router.get("/books/:id", getBookByIdHandler)
  *             type: object
  *             required:
  *               - id
- *               - authorId
+ *               - authorid
  *               - title
  *               - publicationDate
  *             properties:
  *               id:
  *                 type: string
  *                 example: b4
- *               authorId:
+ *               authorid:
  *                 type: string
  *                 example: a1
  *               title:
@@ -131,7 +131,7 @@ router.get("/books/:id", getBookByIdHandler)
  *                 id:
  *                   type: string
  *                   example: b3
- *                 authorId:
+ *                 authorid:
  *                   type: string
  *                   example: a2
  *                 title:
@@ -179,14 +179,14 @@ router.post("/books", createBookHandler);
  *             type: object
  *             required:
  *               - id
- *               - authorId
+ *               - authorid
  *               - title
  *               - publicationDate
  *             properties:
  *               id:
  *                 type: string
  *                 example: b3
- *               authorId:
+ *               authorid:
  *                 type: string
  *                 example: a2
  *               title:
@@ -207,7 +207,7 @@ router.post("/books", createBookHandler);
  *                 id:
  *                   type: string
  *                   example: b3
- *                 authorId:
+ *                 authorid:
  *                   type: string
  *                   example: a2
  *                 title:
@@ -218,7 +218,7 @@ router.post("/books", createBookHandler);
  *                   format: date
  *                   example: 2023-04-10
  *       400:
- *         description: Missing required field, duplicate ID, or invalid authorId.
+ *         description: Missing required field, duplicate ID, or invalid authorid.
  *         content:
  *           application/json:
  *             schema:
@@ -226,7 +226,7 @@ router.post("/books", createBookHandler);
  *               properties:
  *                 message:
  *                   type: string
- *                   example: Invalid authorId. Author does not exist
+ *                   example: Invalid authorid. Author does not exist
  *       404:
  *         description: Book not found.
  *         content:
