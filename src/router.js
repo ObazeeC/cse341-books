@@ -86,12 +86,13 @@ router.get("/books", getBooksHandler);
 router.get("/books/:id", getBookByIdHandler)
 
 
-/****
- * @openapi
+
+/**
+ * @swagger
  * /books:
  *   post:
  *     summary: Create a new book
- *     description: Creates a new book and stores it in the database. The authorid must reference an existing author in the authors collection
+ *     description: Create a new book.
  *     tags:
  *       - Books
  *     requestBody:
@@ -102,23 +103,23 @@ router.get("/books/:id", getBookByIdHandler)
  *             type: object
  *             required:
  *               - id
- *               - authorid
+ *               - authorId
  *               - title
  *               - publicationDate
  *             properties:
  *               id:
  *                 type: string
- *                 example: b1
- *               authorid:
+ *                 example: b4
+ *               authorId:
  *                 type: string
  *                 example: a1
  *               title:
  *                 type: string
- *                 example: Node.js Fundamentals
+ *                 example: Example Book Title
  *               publicationDate:
  *                 type: string
  *                 format: date
- *                 example: 2025-01-01
+ *                 example: 2026-01-15
  *     responses:
  *       201:
  *         description: Book created successfully.
@@ -129,59 +130,115 @@ router.get("/books/:id", getBookByIdHandler)
  *               properties:
  *                 id:
  *                   type: string
- *                 authorid:
+ *                   example: b3
+ *                 authorId:
  *                   type: string
+ *                   example: a2
  *                 title:
  *                   type: string
+ *                   example: The Silent Horizon
  *                 publicationDate:
  *                   type: string
  *                   format: date
+ *                   example: 2023-04-10
  *       400:
- *         description: Missing required fields.
+ *         description: Invalid request.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Invalid authorid. Author does not exist
  *       500:
- *         description: Internal server error.
+ *         description: Internal server error
  */
 router.post("/books", createBookHandler);
 
 /**
- * @openapi
+ * @swagger
  * /books/{id}:
  *   put:
- *     summary: Update a book
- *     description: Updates an existing book by its ID. The authorid must reference an existing author in the authors collection
+ *     summary: Update an existing book
+ *     description: Update an existing book by ID.
  *     tags:
  *       - Books
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
+ *         description: Book ID
  *         schema:
  *           type: string
- *         example: b1
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - id
+ *               - authorId
+ *               - title
+ *               - publicationDate
  *             properties:
- *               authorid:
+ *               id:
  *                 type: string
- *                 example: a1
+ *                 example: b3
+ *               authorId:
+ *                 type: string
+ *                 example: a2
  *               title:
  *                 type: string
- *                 example: Updated Node.js Fundamentals
+ *                 example: The Silent Horizon
  *               publicationDate:
  *                 type: string
  *                 format: date
- *                 example: 2025-10-01
+ *                 example: 2023-04-10
  *     responses:
  *       200:
  *         description: Book updated successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                   example: b3
+ *                 authorId:
+ *                   type: string
+ *                   example: a2
+ *                 title:
+ *                   type: string
+ *                   example: The Silent Horizon
+ *                 publicationDate:
+ *                   type: string
+ *                   format: date
+ *                   example: 2023-04-10
+ *       400:
+ *         description: Missing required field, duplicate ID, or invalid authorId.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Invalid authorId. Author does not exist
  *       404:
  *         description: Book not found.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Book not found
  *       500:
- *         description: Internal server error.
+ *         description: Internal server error
  */
 router.put("/books/:id", updateBookHandler);
 
@@ -304,14 +361,21 @@ router.get("/authors", getauthorsHandler);
  router.post("/authors", createAuthorHandler);
 
 
- /**
+/**
  * @swagger
- * /authors:
- *   post:
- *     summary: Create a new author
- *     description: Creates a new author and adds it to the collection.
+ * /authors/{id}:
+ *   put:
+ *     summary: Update an existing author
+ *     description: Update an existing author by ID.
  *     tags:
  *       - Authors
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Author ID
+ *         schema:
+ *           type: string
  *     requestBody:
  *       required: true
  *       content:
@@ -319,27 +383,26 @@ router.get("/authors", getauthorsHandler);
  *           schema:
  *             type: object
  *             required:
- *               - id
  *               - name
  *               - birthDate
  *             properties:
- *               id:
- *                 type: string
- *                 example: a3
  *               name:
  *                 type: string
- *                 example: Sophia Bennett
- *               BirthDate:
+ *                 example: Sophia Bennett-Williams
+ *               birthDate:
  *                 type: string
- *                 example: "1990"
+ *                 example: "1990-12-12"
  *     responses:
- *       201:
- *         description: Author created successfully.
+ *       200:
+ *         description: Author updated successfully
  *       400:
- *         description: Invalid author data.
- */
+ *         description: Invalid request data
+ *       404:
+ *         description: Author not found
+ *       500:
+ *         description: Internal server error
+ * */
 router.put("/authors/:id", updateAuthorHandler); 
-
 
 /**
  * @openapi
