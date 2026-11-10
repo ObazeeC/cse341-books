@@ -9,17 +9,17 @@ const getAllBooks = async () => {
   //*** * do everything with one line of code ***
   //  return await getDb().collection("books").find({}).toArray();
  
-}
+};
 
 const getBookById = async(bookId) =>{
     return await getDb().collection("books").findOne({id:bookId});
-}
+};
 
 
 //create one boock
 const createBook = async(book) => {
   return await getDb().collection("books").insertOne(book)
-}
+};
 
 // update a book
 const updatebook = async(bookid, updatedBook) => {
@@ -35,16 +35,16 @@ const deleteBook = async(bookid) =>{
 };
 
 // getAuthorId
-const getAuthorId = async(authorId) =>{
-  return await getDb().collection("books").findOne({id:authorId});
-}
+const getAuthorId = async(id) =>{
+  return await getDb().collection("books").findOne({authorid:id});
+};
 
 
 // AUTHORS
-/*
+
 const getIdAuthorCollection = async(authorId) =>{
   return await getDb().collection("authors").findOne({id:authorId});
-}*/
+}
 
 // all author
 const getAllauthors = async () => {
@@ -52,17 +52,17 @@ const getAllauthors = async () => {
   const collection = db.collection("authors");
   const authors = await collection.find({}).toArray();
   return authors;
-}
+};
 
 // author by id
 const getAuthorById = async(authorId) =>{
     return await getDb().collection("authors").findOne({id:authorId});
-}
+};
 
 //create one author
 const createAuthor = async(author) => {
   return await getDb().collection("authors").insertOne(author)
-}
+};
 
 // update a book
 const updateAuthor = async(authorid, updatedAuthor) => {
@@ -78,4 +78,4 @@ const deleteAuthor = async(Authorid) =>{
 
 export {getAllBooks, getBookById, createBook, updatebook, deleteBook,
         getAuthorId,getAllauthors,getAuthorById, createAuthor, updateAuthor,
-         deleteAuthor};
+         deleteAuthor,getIdAuthorCollection};

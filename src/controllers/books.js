@@ -1,5 +1,5 @@
 import { getAllBooks,getBookById,createBook,updatebook, deleteBook, getAuthorId,
-         getAllauthors,getAuthorById,createAuthor,updateAuthor, deleteAuthor
+         getAllauthors,getAuthorById,createAuthor,updateAuthor, deleteAuthor, getIdAuthorCollection
         } from "../models/books.js";
 
 // get all books
@@ -79,7 +79,7 @@ const updateBookHandler = async(req, res)=>{
         const updatedBook = {authorid, title, publicationDate};
         const result = await updatebook(id, updatedBook)
 
-        if(result.matchdCount === 0){
+        if(result.matchedCount === 0){
             return res.status(400).json({  message: "Book not found"});
         }
         return res.status(200).json({message: "Book updated successfully"})
@@ -172,12 +172,13 @@ const updateAuthorHandler = async(req, res)=>{
         const {paramid} = req.params;
         const {id, name, birthDate} = req.body;
 
+
         if(!id || !name || !birthDate){
             return res.status(400).json({message: "id, name and birth date are required"});
         }
 
         // check if author exists
-        const author = await getAuthorId(id);
+        const author = await getIdAuthorCollection(id); 
         if(!author){
             return res.status(400).json({message:"Invalid authorid. Author does not exist"});
         }
@@ -185,7 +186,7 @@ const updateAuthorHandler = async(req, res)=>{
         const updatedAuthor = {id, name, birthDate};
         const result = await updateAuthor(paramid, updatedAuthor)
 
-        if(result.matchdCount === 0){
+        if(result.matchedCount === 0){
             return res.status(400).json({  message: "Author not found"});
         }
         return res.status(200).json({message: "Author updated successfully"})
