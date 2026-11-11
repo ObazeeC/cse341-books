@@ -66,7 +66,7 @@
                 "type": "object",
                 "required": [
                   "id",
-                  "authorId",
+                  "authorid",
                   "title",
                   "publicationDate"
                 ],
@@ -75,7 +75,7 @@
                     "type": "string",
                     "example": "b4"
                   },
-                  "authorId": {
+                  "authorid": {
                     "type": "string",
                     "example": "a1"
                   },
@@ -105,7 +105,7 @@
                       "type": "string",
                       "example": "b3"
                     },
-                    "authorId": {
+                    "authorid": {
                       "type": "string",
                       "example": "a2"
                     },
@@ -222,7 +222,7 @@
                 "type": "object",
                 "required": [
                   "id",
-                  "authorId",
+                  "authorid",
                   "title",
                   "publicationDate"
                 ],
@@ -231,7 +231,7 @@
                     "type": "string",
                     "example": "b3"
                   },
-                  "authorId": {
+                  "authorid": {
                     "type": "string",
                     "example": "a2"
                   },
@@ -261,7 +261,7 @@
                       "type": "string",
                       "example": "b3"
                     },
-                    "authorId": {
+                    "authorid": {
                       "type": "string",
                       "example": "a2"
                     },
@@ -280,7 +280,7 @@
             }
           },
           "400": {
-            "description": "Missing required field, duplicate ID, or invalid authorId.",
+            "description": "Missing required field, duplicate ID, or invalid authorid.",
             "content": {
               "application/json": {
                 "schema": {
@@ -288,7 +288,7 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "example": "Invalid authorId. Author does not exist"
+                      "example": "Invalid authorid. Author does not exist"
                     }
                   }
                 }
