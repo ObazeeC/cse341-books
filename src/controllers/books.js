@@ -113,8 +113,8 @@ const updateBookHandler = async(req, res)=>{
         }
         return res.status(200).json({message: "Book updated successfully"})
     } catch(error){
-          // return res.status(500).json({message: "Unable to update record"});
-          return res.status(500).json({message: error.message});
+           return res.status(500).json({message: "Unable to update record"});
+         
     }
 }
 
@@ -178,7 +178,7 @@ const createAuthorHandler = async(req, res) => {
         }
 
         // check if author exists
-        const author = await getAuthorId(id);
+        const author = await getAuthorById(id);
         
         if(author){
             return res.status(400).json({message:"Invalid authorid. Author already exist"});
@@ -190,8 +190,8 @@ const createAuthorHandler = async(req, res) => {
         }
         return res.status(201).json(newAuthor)
     } catch (error){
-        return res.status(500).json({message: "Unable to create new author"});
-       //return res.status(500).json({message: error.message}); --debugging
+       // return res.status(500).json({message: "Unable to create new author"});
+       return res.status(500).json({message: error.message}); --debugging
     }
 
 }
