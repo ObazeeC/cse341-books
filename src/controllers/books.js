@@ -190,40 +190,54 @@ const createAuthorHandler = async(req, res) => {
         }
         return res.status(201).json(newAuthor)
     } catch (error){
-       // return res.status(500).json({message: "Unable to create new author"});
-       return res.status(500).json({message: error.message}); --debugging
+        return res.status(500).json({message: "Unable to create new author"});
+   
     }
 
 }
 
-// Update or PUT book
-const updateAuthorHandler = async(req, res)=>{
-    try{
-        const {paramid} = req.params;
-        const {id, name, birthDate} = req.body;
+// Update or PUT authoer
 
+const updateAuthorHandler = async (req, res) => {
+  try {
+    const authorId = req.params.id;
+    const { name, birthDate } = req.body;
 
-        if(!id || !name || !birthDate){
-            return res.status(400).json({message: "id, name and birth date are required"});
-        }
-
-        // check if author exists
-        const author = await getIdAuthorCollection(id); 
-        if(!author){
-            return res.status(400).json({message:"Invalid authorid. Author does not exist"});
-        }
-        
-        const updatedAuthor = {id, name, birthDate};
-        const result = await updateAuthor(paramid, updatedAuthor)
-
-        if(result.matchedCount === 0){
-            return res.status(400).json({  message: "Author not found"});
-        }
-        return res.status(200).json({message: "Author updated successfully"})
-    } catch(error){
-           return res.status(500).json({message: "Unable to update record"});
+    if (!name || !birthDate) {
+      return res.status(400).json({
+        message: "name and birthDate are required"
+      });
     }
-}
+
+    const author = await getAuthorById(authorId);
+
+    if (!author) {
+      return res.status(404).json({
+        message: "Author not found"
+      });
+    }
+
+    const result = await updateAuthor(authorId, {
+      name,
+      birthDate
+    });
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({
+        message: "Author not found"
+      });
+    }
+
+    return res.status(200).json({
+      message: "Author updated successfully"
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      message: "Unable to update author"
+    });
+  }
+};
 
 // delete book handler
 const deleteAuthorHandler = async(req, res) => {
