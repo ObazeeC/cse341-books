@@ -87,32 +87,7 @@ const createBookHandler = async (req, res) => {
   }
 };
 
-/*
-const createBookHandler = async(req, res) => {
-    try {
-        const {id, authorid, title, publicationDate} = req.body;
-        if(!id || !authorid || !title || !publicationDate){
-            return res.status(400).json({message:"id, authorid, title and publication date are required"});
-        }
 
-        // check if author exists
-        const author = await getAuthorId(authorid);
-        if(!author){
-            return res.status(400).json({message:"Invalid authorid. Author does not exist"});
-        }
-        const newbook = {id, authorid, title, publicationDate};
-        const book = await createBook(newbook);
-        if(!book){
-                return res.status(404).json({Message: "Invalid input"}) 
-        }
-        return res.status(201).json(book)
-    } catch (error){
-        return res.status(500).json({message: "Unable to create new book"});
-       //return res.status(500).json({message: error.message}); --debugging
-    }
-
-}
-*/
 
 // Update or PUT book
 const updateBookHandler = async(req, res)=>{
@@ -125,8 +100,8 @@ const updateBookHandler = async(req, res)=>{
         }
 
         // check if author exists
-        const author = await getAuthorId(authorid);
-        if(!author){
+        const author = await getAuthorById(authorid); 
+        if(!author){ 
             return res.status(400).json({message:"Invalid authorid. Author does not exist"});
         }
         
@@ -138,7 +113,8 @@ const updateBookHandler = async(req, res)=>{
         }
         return res.status(200).json({message: "Book updated successfully"})
     } catch(error){
-           return res.status(500).json({message: "Unable to update record"});
+          // return res.status(500).json({message: "Unable to update record"});
+          return res.status(500).json({message: error.message});
     }
 }
 
